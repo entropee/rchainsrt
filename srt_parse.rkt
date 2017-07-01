@@ -4,7 +4,7 @@
 ; having to do it but their site is sketchy.
 
 ; Read the file one line at a time. The nested regex-replace calls test for caption #, start-time , and read the caption
-; 
+; I run this in DrRacket
 
 (define (read-next-line-iter file)
 	   (let ((line (read-line file 'any)))
