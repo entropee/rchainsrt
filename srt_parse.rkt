@@ -10,11 +10,13 @@
 	   (let ((line (read-line file 'any)))
 	     (unless (eof-object? line)
 
+                (if (> (string-length line) 0) 					;strip out blank lines
               
-               (display  (regexp-replace "^(.?.?.?.?)$"
-                         (regexp-replace "(..:..:..),... --> (..:..:..),..."
-                         (regexp-replace* "<.+?>" line "") "\\1 ") "\n\\1 "))
-
-               
+               (display (regexp-replace #px"^(\\d?\\d?.?.?)$"			; lo
+                         (regexp-replace #px"(..:..:..),... --> (..:..:..),..."
+                         (regexp-replace* #px"<.+?>" line "") "\\1 ") "\n\\1 "))
+               (read-next-line-iter file)
+               )
 	       (read-next-line-iter file))))
+
 (call-with-input-file "report.txt.srt" read-next-line-iter)
